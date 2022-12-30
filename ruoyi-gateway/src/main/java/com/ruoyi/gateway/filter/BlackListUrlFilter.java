@@ -16,6 +16,7 @@ import com.ruoyi.common.core.utils.ServletUtils;
  */
 @Component
 public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUrlFilter.Config> {
+
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
@@ -36,7 +37,7 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
     public static class Config {
         private List<String> blacklistUrl;
 
-        private List<Pattern> blacklistUrlPattern = new ArrayList<>();
+        private final List<Pattern> blacklistUrlPattern = new ArrayList<>();
 
         public boolean matchBlacklist(String url) {
             return !blacklistUrlPattern.isEmpty() && blacklistUrlPattern.stream().anyMatch(p -> p.matcher(url).find());
@@ -49,9 +50,7 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
         public void setBlacklistUrl(List<String> blacklistUrl) {
             this.blacklistUrl = blacklistUrl;
             this.blacklistUrlPattern.clear();
-            this.blacklistUrl.forEach(url -> {
-                this.blacklistUrlPattern.add(Pattern.compile(url.replaceAll("\\*\\*", "(.*?)"), Pattern.CASE_INSENSITIVE));
-            });
+            this.blacklistUrl.forEach(url -> this.blacklistUrlPattern.add(Pattern.compile(url.replaceAll("\\*\\*", "(.*?)"), Pattern.CASE_INSENSITIVE)));
         }
     }
 

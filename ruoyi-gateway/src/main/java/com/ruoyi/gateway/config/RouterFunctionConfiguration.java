@@ -16,6 +16,7 @@ import com.ruoyi.gateway.handler.ValidateCodeHandler;
  */
 @Configuration
 public class RouterFunctionConfiguration {
+
     @Autowired
     private ValidateCodeHandler validateCodeHandler;
 
@@ -26,4 +27,5 @@ public class RouterFunctionConfiguration {
                 RequestPredicates.GET("/code").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
                 validateCodeHandler);
     }
+
 }

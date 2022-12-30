@@ -13,9 +13,11 @@ import com.ruoyi.gateway.handler.SentinelFallbackHandler;
  */
 @Configuration
 public class GatewayConfig {
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SentinelFallbackHandler sentinelGatewayExceptionHandler() {
         return new SentinelFallbackHandler();
     }
+
 }
