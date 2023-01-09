@@ -12,6 +12,7 @@ import com.ruoyi.common.core.utils.StringUtils;
  * @author ruoyi
  */
 public class IpUtils {
+
     /**
      * 获取客户端IP
      *

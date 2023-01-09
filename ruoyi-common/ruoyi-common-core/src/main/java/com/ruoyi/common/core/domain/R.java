@@ -10,6 +10,7 @@ import com.ruoyi.common.core.constant.Constants;
  * @author ruoyi
  */
 public class R<T> implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -99,4 +100,5 @@ public class R<T> implements Serializable {
     public static <T> Boolean isSuccess(R<T> ret) {
         return R.SUCCESS == ret.getCode();
     }
+
 }

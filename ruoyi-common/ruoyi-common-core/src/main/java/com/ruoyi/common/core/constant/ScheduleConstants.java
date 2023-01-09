@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class ScheduleConstants {
+
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME";
 
     /**
@@ -34,6 +35,7 @@ public class ScheduleConstants {
     public static final String MISFIRE_DO_NOTHING = "3";
 
     public enum Status {
+
         /**
          * 正常
          */
@@ -43,7 +45,7 @@ public class ScheduleConstants {
          */
         PAUSE("1");
 
-        private String value;
+        private final String value;
 
         private Status(String value) {
             this.value = value;
@@ -52,5 +54,7 @@ public class ScheduleConstants {
         public String getValue() {
             return value;
         }
+
     }
+
 }

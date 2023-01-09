@@ -18,6 +18,7 @@ import com.ruoyi.system.api.domain.SysUser;
  */
 @Component
 public class SysPasswordService {
+
     @Autowired
     private RedisService redisService;
 
@@ -72,4 +73,5 @@ public class SysPasswordService {
             redisService.deleteObject(getCacheKey(loginName));
         }
     }
+
 }
