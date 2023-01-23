@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import java.lang.annotation.*;
 
 /**
- * 自定义feign注解
+ * 自定义Feign注解
  * 添加basePackages路径
  *
  * @author ruoyi
@@ -15,6 +15,7 @@ import java.lang.annotation.*;
 @Documented
 @EnableFeignClients
 public @interface EnableRyFeignClients {
+
     String[] value() default {};
 
     String[] basePackages() default {"com.ruoyi"};

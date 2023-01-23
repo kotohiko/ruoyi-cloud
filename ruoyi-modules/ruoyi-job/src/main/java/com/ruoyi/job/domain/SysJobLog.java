@@ -1,5 +1,6 @@
 package com.ruoyi.job.domain;
 
+import java.io.Serial;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,6 +14,8 @@ import com.ruoyi.common.core.web.domain.BaseEntity;
  * @author ruoyi
  */
 public class SysJobLog extends BaseEntity {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

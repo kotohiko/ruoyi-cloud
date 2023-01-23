@@ -11,6 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface InnerAuth {
+
     /**
      * 是否校验用户信息
      */

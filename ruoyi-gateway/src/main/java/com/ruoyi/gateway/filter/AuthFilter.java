@@ -28,9 +28,10 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
+
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    // 排除过滤的 uri 地址，nacos自行添加
+    // 排除过滤的URI地址，nacos自行添加
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 
@@ -72,7 +73,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userid);
         addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
         // 内部请求来源参数清除
-        removeHeader(mutate, SecurityConstants.FROM_SOURCE);
+        removeHeader(mutate);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
@@ -85,8 +86,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
         mutate.header(name, valueEncode);
     }
 
-    private void removeHeader(ServerHttpRequest.Builder mutate, String name) {
-        mutate.headers(httpHeaders -> httpHeaders.remove(name)).build();
+    private void removeHeader(ServerHttpRequest.Builder mutate) {
+        mutate.headers(httpHeaders -> httpHeaders.remove(SecurityConstants.FROM_SOURCE)).build();
     }
 
     private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String msg) {

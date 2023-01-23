@@ -20,6 +20,7 @@ import reactor.core.publisher.Mono;
 @Order(-1)
 @Configuration
 public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
+
     private static final Logger log = LoggerFactory.getLogger(GatewayExceptionHandler.class);
 
     @Override
@@ -34,8 +35,7 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
 
         if (ex instanceof NotFoundException) {
             msg = "服务未找到";
-        } else if (ex instanceof ResponseStatusException) {
-            ResponseStatusException responseStatusException = (ResponseStatusException) ex;
+        } else if (ex instanceof ResponseStatusException responseStatusException) {
             msg = responseStatusException.getMessage();
         } else {
             msg = "内部服务器错误";

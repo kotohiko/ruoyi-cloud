@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <artifactId>ruoyi-cloud</artifactId>
     <version>3.6.1</version>
 
     <name>ruoyi</name>
@@ -16,7 +16,7 @@
         <ruoyi.version>3.6.1</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <spring-boot.version>2.7.3</spring-boot.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
@@ -52,7 +52,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- SpringCloud Alibaba 微服务 -->
+            <!-- SpringCloud Alibaba微服务 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -61,7 +61,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- SpringBoot 依赖配置 -->
+            <!-- SpringBoot依赖配置 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -70,14 +70,14 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- FastDFS 分布式文件系统 -->
+            <!-- FastDFS分布式文件系统 -->
             <dependency>
                 <groupId>com.github.tobato</groupId>
                 <artifactId>fastdfs-client</artifactId>
                 <version>${tobato.version}</version>
             </dependency>
 
-            <!-- Swagger 依赖配置 -->
+            <!-- Swagger依赖配置 -->
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
@@ -96,7 +96,7 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
-            <!-- pagehelper 分页插件 -->
+            <!-- pagehelper分页插件 -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -131,14 +131,14 @@
                 <version>${velocity.version}</version>
             </dependency>
 
-            <!-- Collection 增强Java集合框架 -->
+            <!-- Collection增强Java集合框架 -->
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
             </dependency>
 
-            <!-- JSON 解析器和生成器 -->
+            <!-- JSON解析器和生成器 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>

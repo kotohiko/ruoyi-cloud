@@ -13,6 +13,7 @@ import io.minio.MinioClient;
 @Configuration
 @ConfigurationProperties(prefix = "minio")
 public class MinioConfig {
+
     /**
      * 服务地址
      */

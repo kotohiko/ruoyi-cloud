@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
  * @author ruoyi
  */
 public class ApplicationConfig {
+
     /**
      * 时区配置
      */

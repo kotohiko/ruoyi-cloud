@@ -25,6 +25,7 @@ import com.ruoyi.system.api.model.LoginUser;
  * @author ruoyi
  */
 public class AuthLogic {
+
     /**
      * 所有权限标识
      */

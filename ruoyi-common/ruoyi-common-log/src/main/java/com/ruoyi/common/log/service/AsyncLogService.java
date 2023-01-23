@@ -14,6 +14,7 @@ import com.ruoyi.system.api.domain.SysOperLog;
  */
 @Service
 public class AsyncLogService {
+
     @Autowired
     private RemoteLogService remoteLogService;
 

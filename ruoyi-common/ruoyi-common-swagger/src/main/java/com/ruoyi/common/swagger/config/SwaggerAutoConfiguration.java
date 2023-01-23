@@ -30,6 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration
 @ConditionalOnProperty(name = "swagger.enabled", matchIfMissing = true)
 public class SwaggerAutoConfiguration {
+
     /**
      * 默认的排除路径，排除Spring Boot默认的错误处理路径和端点
      */
@@ -49,8 +50,7 @@ public class SwaggerAutoConfiguration {
         if (swaggerProperties.getBasePath().isEmpty()) {
             swaggerProperties.getBasePath().add(BASE_PATH);
         }
-        // noinspection unchecked
-        List<Predicate<String>> basePath = new ArrayList<Predicate<String>>();
+        List<Predicate<String>> basePath = new ArrayList<>();
         swaggerProperties.getBasePath().forEach(path -> basePath.add(PathSelectors.ant(path)));
 
         // exclude-path处理
@@ -75,7 +75,7 @@ public class SwaggerAutoConfiguration {
      * 安全模式，这里指定token通过Authorization头请求头传递
      */
     private List<SecurityScheme> securitySchemes() {
-        List<SecurityScheme> apiKeyList = new ArrayList<SecurityScheme>();
+        List<SecurityScheme> apiKeyList = new ArrayList<>();
         apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
         return apiKeyList;
     }

@@ -287,7 +287,7 @@ public class SysDeptServiceImpl implements ISysDeptService {
         List<SysDept> tlist = new ArrayList<SysDept>();
         Iterator<SysDept> it = list.iterator();
         while (it.hasNext()) {
-            SysDept n = (SysDept) it.next();
+            SysDept n = it.next();
             if (StringUtils.isNotNull(n.getParentId()) && n.getParentId().longValue() == t.getDeptId().longValue()) {
                 tlist.add(n);
             }
@@ -299,6 +299,6 @@ public class SysDeptServiceImpl implements ISysDeptService {
      * 判断是否有子节点
      */
     private boolean hasChild(List<SysDept> list, SysDept t) {
-        return getChildList(list, t).size() > 0 ? true : false;
+        return getChildList(list, t).size() > 0;
     }
 }

@@ -14,6 +14,7 @@ import com.ruoyi.job.mapper.SysJobLogMapper;
  */
 @Service
 public class SysJobLogServiceImpl implements ISysJobLogService {
+
     @Autowired
     private SysJobLogMapper jobLogMapper;
 

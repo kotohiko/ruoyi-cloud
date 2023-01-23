@@ -57,7 +57,7 @@ public class DataScopeAspect {
     public static final String DATA_SCOPE = "dataScope";
 
     @Before("@annotation(controllerDataScope)")
-    public void doBefore(JoinPoint point, DataScope controllerDataScope) throws Throwable {
+    public void doBefore(JoinPoint point, DataScope controllerDataScope) {
         clearDataScope(point);
         handleDataScope(point, controllerDataScope);
     }
@@ -86,7 +86,7 @@ public class DataScopeAspect {
      */
     public static void dataScopeFilter(JoinPoint joinPoint, SysUser user, String deptAlias, String userAlias, String permission) {
         StringBuilder sqlString = new StringBuilder();
-        List<String> conditions = new ArrayList<String>();
+        List<String> conditions = new ArrayList<>();
 
         for (SysRole role : user.getRoles()) {
             String dataScope = role.getDataScope();
@@ -118,8 +118,7 @@ public class DataScopeAspect {
 
         if (StringUtils.isNotBlank(sqlString.toString())) {
             Object params = joinPoint.getArgs()[0];
-            if (StringUtils.isNotNull(params) && params instanceof BaseEntity) {
-                BaseEntity baseEntity = (BaseEntity) params;
+            if (StringUtils.isNotNull(params) && params instanceof BaseEntity baseEntity) {
                 baseEntity.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
             }
         }
@@ -130,8 +129,7 @@ public class DataScopeAspect {
      */
     private void clearDataScope(final JoinPoint joinPoint) {
         Object params = joinPoint.getArgs()[0];
-        if (StringUtils.isNotNull(params) && params instanceof BaseEntity) {
-            BaseEntity baseEntity = (BaseEntity) params;
+        if (StringUtils.isNotNull(params) && params instanceof BaseEntity baseEntity) {
             baseEntity.getParams().put(DATA_SCOPE, "");
         }
     }

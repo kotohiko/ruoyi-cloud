@@ -10,6 +10,7 @@ import com.ruoyi.system.api.model.LoginUser;
  * @author ruoyi
  */
 public class AuthUtil {
+
     /**
      * 底层的 AuthLogic 对象
      */

@@ -10,7 +10,6 @@ import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * swagger 在 springboot 2.6.x 不兼容问题的处理
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class SwaggerBeanPostProcessor implements BeanPostProcessor {
+
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof WebMvcRequestHandlerProvider || bean instanceof WebFluxRequestHandlerProvider) {
@@ -29,7 +29,7 @@ public class SwaggerBeanPostProcessor implements BeanPostProcessor {
 
     private <T extends RequestMappingInfoHandlerMapping> void customizeSpringfoxHandlerMappings(List<T> mappings) {
         List<T> copy = mappings.stream().filter(mapping -> mapping.getPatternParser() == null)
-                .collect(Collectors.toList());
+                .toList();
         mappings.clear();
         mappings.addAll(copy);
     }

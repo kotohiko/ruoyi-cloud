@@ -11,6 +11,8 @@ import com.ruoyi.common.core.utils.ServletUtils;
 import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.security.annotation.InnerAuth;
 
+import java.util.Objects;
+
 /**
  * 内部服务调用验证处理
  *
@@ -19,9 +21,10 @@ import com.ruoyi.common.security.annotation.InnerAuth;
 @Aspect
 @Component
 public class InnerAuthAspect implements Ordered {
+
     @Around("@annotation(innerAuth)")
     public Object innerAround(ProceedingJoinPoint point, InnerAuth innerAuth) throws Throwable {
-        String source = ServletUtils.getRequest().getHeader(SecurityConstants.FROM_SOURCE);
+        String source = Objects.requireNonNull(ServletUtils.getRequest()).getHeader(SecurityConstants.FROM_SOURCE);
         // 内部请求验证
         if (!StringUtils.equals(SecurityConstants.INNER, source)) {
             throw new InnerAuthException("没有内部访问权限，不允许访问");

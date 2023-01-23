@@ -11,6 +11,7 @@ import feign.RequestInterceptor;
  **/
 @Configuration
 public class FeignAutoConfiguration {
+
     @Bean
     public RequestInterceptor requestInterceptor() {
         return new FeignRequestInterceptor();

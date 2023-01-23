@@ -6,6 +6,7 @@ package com.ruoyi.common.log.enums;
  * @author ruoyi
  */
 public enum BusinessStatus {
+
     /**
      * 成功
      */

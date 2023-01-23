@@ -21,6 +21,7 @@ import com.ruoyi.common.security.auth.AuthUtil;
 @Aspect
 @Component
 public class PreAuthorizeAspect {
+
     /**
      * 构建
      */
@@ -55,8 +56,7 @@ public class PreAuthorizeAspect {
         checkMethodAnnotation(signature.getMethod());
         try {
             // 执行原有逻辑
-            Object obj = joinPoint.proceed();
-            return obj;
+            return joinPoint.proceed();
         } catch (Throwable e) {
             throw e;
         }

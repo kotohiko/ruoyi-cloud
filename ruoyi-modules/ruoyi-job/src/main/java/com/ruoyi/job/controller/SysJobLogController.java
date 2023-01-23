@@ -28,6 +28,7 @@ import com.ruoyi.job.service.ISysJobLogService;
 @RestController
 @RequestMapping("/job/log")
 public class SysJobLogController extends BaseController {
+
     @Autowired
     private ISysJobLogService jobLogService;
 

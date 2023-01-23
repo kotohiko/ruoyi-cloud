@@ -20,8 +20,9 @@ import com.ruoyi.system.api.model.LoginUser;
  * @author ruoyi
  */
 public class HeaderInterceptor implements AsyncHandlerInterceptor {
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
@@ -42,8 +43,7 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         SecurityContextHolder.remove();
     }
 }

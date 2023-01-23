@@ -34,6 +34,7 @@ import reactor.core.publisher.Mono;
 @Component
 @ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
+
     // 跨站脚本的 xss 配置，nacos自行添加
     @Autowired
     private XssProperties xss;
@@ -65,7 +66,7 @@ public class XssFilter implements GlobalFilter, Ordered {
     }
 
     private ServerHttpRequestDecorator requestDecorator(ServerWebExchange exchange) {
-        ServerHttpRequestDecorator serverHttpRequestDecorator = new ServerHttpRequestDecorator(exchange.getRequest()) {
+        return new ServerHttpRequestDecorator(exchange.getRequest()) {
             @Override
             public Flux<DataBuffer> getBody() {
                 Flux<DataBuffer> body = super.getBody();
@@ -76,7 +77,7 @@ public class XssFilter implements GlobalFilter, Ordered {
                     join.read(content);
                     DataBufferUtils.release(join);
                     String bodyStr = new String(content, StandardCharsets.UTF_8);
-                    // 防xss攻击过滤
+                    // 防XSS攻击过滤
                     bodyStr = EscapeUtil.clean(bodyStr);
                     // 转成字节
                     byte[] bytes = bodyStr.getBytes();
@@ -98,7 +99,6 @@ public class XssFilter implements GlobalFilter, Ordered {
             }
 
         };
-        return serverHttpRequestDecorator;
     }
 
     /**

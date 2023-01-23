@@ -24,6 +24,7 @@ import com.ruoyi.job.util.ScheduleUtils;
  */
 @Service
 public class SysJobServiceImpl implements ISysJobService {
+
     @Autowired
     private Scheduler scheduler;
 

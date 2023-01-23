@@ -16,6 +16,7 @@ import com.ruoyi.system.api.domain.SysDictData;
  * @author ruoyi
  */
 public class DictUtils {
+
     /**
      * 设置字典缓存
      *

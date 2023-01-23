@@ -28,6 +28,7 @@ import com.ruoyi.gateway.service.ValidateCodeService;
  */
 @Service
 public class ValidateCodeServiceImpl implements ValidateCodeService {
+
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
 
@@ -44,7 +45,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
      * 生成验证码
      */
     @Override
-    public AjaxResult createCaptcha() throws IOException, CaptchaException {
+    public AjaxResult createCaptcha() throws CaptchaException {
         AjaxResult ajax = AjaxResult.success();
         boolean captchaEnabled = captchaProperties.getEnabled();
         ajax.put("captchaEnabled", captchaEnabled);
@@ -56,7 +57,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         String uuid = IdUtils.simpleUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
-        String capStr = null, code = null;
+        String capStr, code = null;
         BufferedImage image = null;
 
         String captchaType = captchaProperties.getType();
@@ -75,6 +76,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {
+            assert image != null;
             ImageIO.write(image, "jpg", os);
         } catch (IOException e) {
             return AjaxResult.error(e.getMessage());

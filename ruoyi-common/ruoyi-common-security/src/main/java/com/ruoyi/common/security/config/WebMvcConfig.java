@@ -10,6 +10,7 @@ import com.ruoyi.common.security.interceptor.HeaderInterceptor;
  * @author ruoyi
  */
 public class WebMvcConfig implements WebMvcConfigurer {
+
     /**
      * 不需要拦截地址
      */
