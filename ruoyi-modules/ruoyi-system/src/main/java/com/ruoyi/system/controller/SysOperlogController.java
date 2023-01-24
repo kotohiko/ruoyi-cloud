@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/operlog")
 public class SysOperlogController extends BaseController {
+
     @Autowired
     private ISysOperLogService operLogService;
 
@@ -40,7 +41,7 @@ public class SysOperlogController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysOperLog operLog) {
         List<SysOperLog> list = operLogService.selectOperLogList(operLog);
-        ExcelUtil<SysOperLog> util = new ExcelUtil<SysOperLog>(SysOperLog.class);
+        ExcelUtil<SysOperLog> util = new ExcelUtil<>(SysOperLog.class);
         util.exportExcel(response, list, "操作日志");
     }
 

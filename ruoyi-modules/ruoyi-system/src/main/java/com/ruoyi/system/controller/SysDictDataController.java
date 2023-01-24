@@ -28,6 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dict/data")
 public class SysDictDataController extends BaseController {
+
     @Autowired
     private ISysDictDataService dictDataService;
 
@@ -47,7 +48,7 @@ public class SysDictDataController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysDictData dictData) {
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
-        ExcelUtil<SysDictData> util = new ExcelUtil<SysDictData>(SysDictData.class);
+        ExcelUtil<SysDictData> util = new ExcelUtil<>(SysDictData.class);
         util.exportExcel(response, list, "字典数据");
     }
 
@@ -67,7 +68,7 @@ public class SysDictDataController extends BaseController {
     public AjaxResult dictType(@PathVariable String dictType) {
         List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);
         if (StringUtils.isNull(data)) {
-            data = new ArrayList<SysDictData>();
+            data = new ArrayList<>();
         }
         return success(data);
     }

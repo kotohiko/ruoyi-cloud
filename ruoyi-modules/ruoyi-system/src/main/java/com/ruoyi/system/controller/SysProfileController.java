@@ -30,6 +30,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/user/profile")
 public class SysProfileController extends BaseController {
+
     @Autowired
     private ISysUserService userService;
 

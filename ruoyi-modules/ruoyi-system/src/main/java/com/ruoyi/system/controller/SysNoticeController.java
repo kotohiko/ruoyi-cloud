@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/notice")
 public class SysNoticeController extends BaseController {
+
     @Autowired
     private ISysNoticeService noticeService;
 

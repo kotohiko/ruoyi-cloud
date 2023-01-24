@@ -12,8 +12,9 @@ import java.util.List;
  * @author ruoyi
  */
 public interface ISysJobService {
+
     /**
-     * 获取quartz调度器的计划任务
+     * 获取Quartz调度器的计划任务
      *
      * @param job 调度信息
      * @return 调度任务集合
@@ -48,15 +49,13 @@ public interface ISysJobService {
      * 删除任务后，所对应的trigger也将被删除
      *
      * @param job 调度信息
-     * @return 结果
      */
-    int deleteJob(SysJob job) throws SchedulerException;
+    void deleteJob(SysJob job) throws SchedulerException;
 
     /**
      * 批量删除调度信息
      *
      * @param jobIds 需要删除的任务ID
-     * @return 结果
      */
     void deleteJobByIds(Long[] jobIds) throws SchedulerException;
 

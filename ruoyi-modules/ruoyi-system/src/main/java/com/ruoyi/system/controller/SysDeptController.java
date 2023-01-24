@@ -25,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dept")
 public class SysDeptController extends BaseController {
+
     @Autowired
     private ISysDeptService deptService;
 

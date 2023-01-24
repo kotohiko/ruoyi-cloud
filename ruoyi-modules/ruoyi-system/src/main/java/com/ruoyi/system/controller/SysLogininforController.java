@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/logininfor")
 public class SysLogininforController extends BaseController {
+
     @Autowired
     private ISysLogininforService logininforService;
 
@@ -45,7 +46,7 @@ public class SysLogininforController extends BaseController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysLogininfor logininfor) {
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
+        ExcelUtil<SysLogininfor> util = new ExcelUtil<>(SysLogininfor.class);
         util.exportExcel(response, list, "登录日志");
     }
 

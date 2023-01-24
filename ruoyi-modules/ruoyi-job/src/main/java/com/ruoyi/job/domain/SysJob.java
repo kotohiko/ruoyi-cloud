@@ -12,6 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.util.Date;
 
 /**
@@ -20,6 +21,8 @@ import java.util.Date;
  * @author ruoyi
  */
 public class SysJob extends BaseEntity {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -79,7 +82,7 @@ public class SysJob extends BaseEntity {
     }
 
     @NotBlank(message = "任务名称不能为空")
-    @Size(min = 0, max = 64, message = "任务名称不能超过64个字符")
+    @Size(max = 64, message = "任务名称不能超过64个字符")
     public String getJobName() {
         return jobName;
     }
@@ -97,7 +100,7 @@ public class SysJob extends BaseEntity {
     }
 
     @NotBlank(message = "调用目标字符串不能为空")
-    @Size(min = 0, max = 500, message = "调用目标字符串长度不能超过500个字符")
+    @Size(max = 500, message = "调用目标字符串长度不能超过500个字符")
     public String getInvokeTarget() {
         return invokeTarget;
     }
@@ -107,7 +110,7 @@ public class SysJob extends BaseEntity {
     }
 
     @NotBlank(message = "Cron执行表达式不能为空")
-    @Size(min = 0, max = 255, message = "Cron执行表达式不能超过255个字符")
+    @Size(max = 255, message = "Cron执行表达式不能超过255个字符")
     public String getCronExpression() {
         return cronExpression;
     }
@@ -150,20 +153,6 @@ public class SysJob extends BaseEntity {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("jobId", getJobId())
-                .append("jobName", getJobName())
-                .append("jobGroup", getJobGroup())
-                .append("cronExpression", getCronExpression())
-                .append("nextValidTime", getNextValidTime())
-                .append("misfirePolicy", getMisfirePolicy())
-                .append("concurrent", getConcurrent())
-                .append("status", getStatus())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("jobId", getJobId()).append("jobName", getJobName()).append("jobGroup", getJobGroup()).append("cronExpression", getCronExpression()).append("nextValidTime", getNextValidTime()).append("misfirePolicy", getMisfirePolicy()).append("concurrent", getConcurrent()).append("status", getStatus()).append("createBy", getCreateBy()).append("createTime", getCreateTime()).append("updateBy", getUpdateBy()).append("updateTime", getUpdateTime()).append("remark", getRemark()).toString();
     }
 }
