@@ -10,6 +10,7 @@ import com.ruoyi.system.api.domain.SysUser;
  * @author ruoyi
  */
 public interface ISysPermissionService {
+
     /**
      * 获取角色数据权限
      *

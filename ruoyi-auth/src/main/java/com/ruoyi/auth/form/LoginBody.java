@@ -6,6 +6,7 @@ package com.ruoyi.auth.form;
  * @author ruoyi
  */
 public class LoginBody {
+
     /**
      * 用户名
      */

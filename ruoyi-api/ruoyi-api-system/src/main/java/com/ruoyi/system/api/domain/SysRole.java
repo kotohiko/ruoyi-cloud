@@ -1,15 +1,15 @@
 package com.ruoyi.system.api.domain;
 
-import java.util.Set;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.annotation.Excel;
 import com.ruoyi.common.core.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.web.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * 角色表 sys_role
@@ -98,6 +98,10 @@ public class SysRole extends BaseEntity {
         this.roleId = roleId;
     }
 
+    public static boolean isAdmin(Long roleId) {
+        return roleId != null && 1L == roleId;
+    }
+
     public Long getRoleId() {
         return roleId;
     }
@@ -108,10 +112,6 @@ public class SysRole extends BaseEntity {
 
     public boolean isAdmin() {
         return isAdmin(this.roleId);
-    }
-
-    public static boolean isAdmin(Long roleId) {
-        return roleId != null && 1L == roleId;
     }
 
     @NotBlank(message = "角色名称不能为空")

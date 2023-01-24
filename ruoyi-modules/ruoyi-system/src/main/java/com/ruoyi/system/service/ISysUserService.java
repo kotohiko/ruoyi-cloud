@@ -10,6 +10,7 @@ import com.ruoyi.system.api.domain.SysUser;
  * @author ruoyi
  */
 public interface ISysUserService {
+
     /**
      * 根据条件分页查询用户列表
      *

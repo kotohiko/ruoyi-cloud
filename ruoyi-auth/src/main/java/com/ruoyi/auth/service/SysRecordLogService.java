@@ -27,7 +27,6 @@ public class SysRecordLogService {
      * @param username 用户名
      * @param status   状态
      * @param message  消息内容
-     * @return
      */
     public void recordLogininfor(String username, String status, String message) {
         SysLogininfor logininfor = new SysLogininfor();

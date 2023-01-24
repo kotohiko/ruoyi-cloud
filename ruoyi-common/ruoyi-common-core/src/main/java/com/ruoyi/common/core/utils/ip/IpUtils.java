@@ -1,10 +1,10 @@
 package com.ruoyi.common.core.utils.ip;
 
+import com.ruoyi.common.core.utils.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import javax.servlet.http.HttpServletRequest;
-
-import com.ruoyi.common.core.utils.StringUtils;
 
 /**
  * 获取IP方法
@@ -84,9 +84,8 @@ public class IpUtils {
                     return true;
                 }
             case SECTION_5:
-                switch (b1) {
-                    case SECTION_6:
-                        return true;
+                if (b1 == SECTION_6) {
+                    return true;
                 }
             default:
                 return false;
@@ -204,7 +203,7 @@ public class IpUtils {
         if (ip != null && ip.indexOf(",") > 0) {
             final String[] ips = ip.trim().split(",");
             for (String subIp : ips) {
-                if (false == isUnknown(subIp)) {
+                if (!isUnknown(subIp)) {
                     ip = subIp;
                     break;
                 }

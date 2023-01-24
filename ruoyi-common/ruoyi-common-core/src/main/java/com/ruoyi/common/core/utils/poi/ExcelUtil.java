@@ -1,57 +1,5 @@
 package com.ruoyi.common.core.utils.poi;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.ClientAnchor;
-import org.apache.poi.ss.usermodel.DataValidation;
-import org.apache.poi.ss.usermodel.DataValidationConstraint;
-import org.apache.poi.ss.usermodel.DataValidationHelper;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Drawing;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Name;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.poi.util.IOUtils;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
-import org.apache.poi.xssf.usermodel.XSSFDataValidation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.ruoyi.common.core.annotation.Excel;
 import com.ruoyi.common.core.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.annotation.Excel.Type;
@@ -62,6 +10,31 @@ import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.core.utils.file.FileTypeUtils;
 import com.ruoyi.common.core.utils.file.ImageUtils;
 import com.ruoyi.common.core.utils.reflect.ReflectUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFDataValidation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Excel相关处理
@@ -69,109 +42,156 @@ import com.ruoyi.common.core.utils.reflect.ReflectUtils;
  * @author ruoyi
  */
 public class ExcelUtil<T> {
-    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
-
     public static final String FORMULA_REGEX_STR = "=|-|\\+|@";
-
     public static final String[] FORMULA_STR = {"=", "-", "+", "@"};
-
     /**
      * Excel sheet最大行数，默认65536
      */
     public static final int sheetSize = 65536;
-
-    /**
-     * 工作表名称
-     */
-    private String sheetName;
-
-    /**
-     * 导出类型（EXPORT:导出数据；IMPORT：导入模板）
-     */
-    private Type type;
-
-    /**
-     * 工作薄对象
-     */
-    private Workbook wb;
-
-    /**
-     * 工作表对象
-     */
-    private Sheet sheet;
-
-    /**
-     * 样式列表
-     */
-    private Map<String, CellStyle> styles;
-
-    /**
-     * 导入导出数据列表
-     */
-    private List<T> list;
-
-    /**
-     * 注解列表
-     */
-    private List<Object[]> fields;
-
-    /**
-     * 当前行号
-     */
-    private int rownum;
-
-    /**
-     * 标题
-     */
-    private String title;
-
-    /**
-     * 最大高度
-     */
-    private short maxHeight;
-
-    /**
-     * 合并后最后行数
-     */
-    private int subMergedLastRowNum = 0;
-
-    /**
-     * 合并后开始行数
-     */
-    private int subMergedFirstRowNum = 1;
-
-    /**
-     * 对象的子列表方法
-     */
-    private Method subMethod;
-
-    /**
-     * 对象的子列表属性
-     */
-    private List<Field> subFields;
-
-    /**
-     * 统计列表
-     */
-    private Map<Integer, Double> statistics = new HashMap<Integer, Double>();
-
+    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
     /**
      * 数字格式
      */
     private static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("######0.00");
-
     /**
      * 实体对象
      */
     public Class<T> clazz;
-
     /**
      * 需要排除列属性
      */
     public String[] excludeFields;
+    /**
+     * 工作表名称
+     */
+    private String sheetName;
+    /**
+     * 导出类型（EXPORT:导出数据；IMPORT：导入模板）
+     */
+    private Type type;
+    /**
+     * 工作薄对象
+     */
+    private Workbook wb;
+    /**
+     * 工作表对象
+     */
+    private Sheet sheet;
+    /**
+     * 样式列表
+     */
+    private Map<String, CellStyle> styles;
+    /**
+     * 导入导出数据列表
+     */
+    private List<T> list;
+    /**
+     * 注解列表
+     */
+    private List<Object[]> fields;
+    /**
+     * 当前行号
+     */
+    private int rownum;
+    /**
+     * 标题
+     */
+    private String title;
+    /**
+     * 最大高度
+     */
+    private short maxHeight;
+    /**
+     * 合并后最后行数
+     */
+    private int subMergedLastRowNum = 0;
+    /**
+     * 合并后开始行数
+     */
+    private int subMergedFirstRowNum = 1;
+    /**
+     * 对象的子列表方法
+     */
+    private Method subMethod;
+    /**
+     * 对象的子列表属性
+     */
+    private List<Field> subFields;
+    /**
+     * 统计列表
+     */
+    private final Map<Integer, Double> statistics = new HashMap<Integer, Double>();
 
     public ExcelUtil(Class<T> clazz) {
         this.clazz = clazz;
+    }
+
+    /**
+     * 获取画布
+     */
+    public static Drawing<?> getDrawingPatriarch(Sheet sheet) {
+        if (sheet.getDrawingPatriarch() == null) {
+            sheet.createDrawingPatriarch();
+        }
+        return sheet.getDrawingPatriarch();
+    }
+
+    /**
+     * 解析导出值 0=男,1=女,2=未知
+     *
+     * @param propertyValue 参数值
+     * @param converterExp  翻译注解
+     * @param separator     分隔符
+     * @return 解析后值
+     */
+    public static String convertByExp(String propertyValue, String converterExp, String separator) {
+        StringBuilder propertyString = new StringBuilder();
+        String[] convertSource = converterExp.split(",");
+        for (String item : convertSource) {
+            String[] itemArray = item.split("=");
+            if (StringUtils.containsAny(propertyValue, separator)) {
+                for (String value : propertyValue.split(separator)) {
+                    if (itemArray[0].equals(value)) {
+                        propertyString.append(itemArray[1] + separator);
+                        break;
+                    }
+                }
+            } else {
+                if (itemArray[0].equals(propertyValue)) {
+                    return itemArray[1];
+                }
+            }
+        }
+        return StringUtils.stripEnd(propertyString.toString(), separator);
+    }
+
+    /**
+     * 反向解析值 男=0,女=1,未知=2
+     *
+     * @param propertyValue 参数值
+     * @param converterExp  翻译注解
+     * @param separator     分隔符
+     * @return 解析后值
+     */
+    public static String reverseByExp(String propertyValue, String converterExp, String separator) {
+        StringBuilder propertyString = new StringBuilder();
+        String[] convertSource = converterExp.split(",");
+        for (String item : convertSource) {
+            String[] itemArray = item.split("=");
+            if (StringUtils.containsAny(propertyValue, separator)) {
+                for (String value : propertyValue.split(separator)) {
+                    if (itemArray[1].equals(value)) {
+                        propertyString.append(itemArray[0] + separator);
+                        break;
+                    }
+                }
+            } else {
+                if (itemArray[1].equals(propertyValue)) {
+                    return itemArray[0];
+                }
+            }
+        }
+        return StringUtils.stripEnd(propertyString.toString(), separator);
     }
 
     /**
@@ -491,7 +511,7 @@ public class ExcelUtil<T> {
             rowNo = isSubList() ? (i > 1 ? rowNo + 1 : rowNo + i) : i + 1 + rownum - startNo;
             row = sheet.createRow(rowNo);
             // 得到导出对象.
-            T vo = (T) list.get(i);
+            T vo = list.get(i);
             Collection<?> subList = null;
             if (isSubList()) {
                 if (isSubListValue(vo)) {
@@ -705,16 +725,6 @@ public class ExcelUtil<T> {
     }
 
     /**
-     * 获取画布
-     */
-    public static Drawing<?> getDrawingPatriarch(Sheet sheet) {
-        if (sheet.getDrawingPatriarch() == null) {
-            sheet.createDrawingPatriarch();
-        }
-        return sheet.getDrawingPatriarch();
-    }
-
-    /**
      * 获取图片类型,设置图片插入类型
      */
     public int getImageType(byte[] value) {
@@ -870,64 +880,6 @@ public class ExcelUtil<T> {
     }
 
     /**
-     * 解析导出值 0=男,1=女,2=未知
-     *
-     * @param propertyValue 参数值
-     * @param converterExp  翻译注解
-     * @param separator     分隔符
-     * @return 解析后值
-     */
-    public static String convertByExp(String propertyValue, String converterExp, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        String[] convertSource = converterExp.split(",");
-        for (String item : convertSource) {
-            String[] itemArray = item.split("=");
-            if (StringUtils.containsAny(propertyValue, separator)) {
-                for (String value : propertyValue.split(separator)) {
-                    if (itemArray[0].equals(value)) {
-                        propertyString.append(itemArray[1] + separator);
-                        break;
-                    }
-                }
-            } else {
-                if (itemArray[0].equals(propertyValue)) {
-                    return itemArray[1];
-                }
-            }
-        }
-        return StringUtils.stripEnd(propertyString.toString(), separator);
-    }
-
-    /**
-     * 反向解析值 男=0,女=1,未知=2
-     *
-     * @param propertyValue 参数值
-     * @param converterExp  翻译注解
-     * @param separator     分隔符
-     * @return 解析后值
-     */
-    public static String reverseByExp(String propertyValue, String converterExp, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        String[] convertSource = converterExp.split(",");
-        for (String item : convertSource) {
-            String[] itemArray = item.split("=");
-            if (StringUtils.containsAny(propertyValue, separator)) {
-                for (String value : propertyValue.split(separator)) {
-                    if (itemArray[1].equals(value)) {
-                        propertyString.append(itemArray[0] + separator);
-                        break;
-                    }
-                }
-            } else {
-                if (itemArray[1].equals(propertyValue)) {
-                    return itemArray[0];
-                }
-            }
-        }
-        return StringUtils.stripEnd(propertyString.toString(), separator);
-    }
-
-    /**
      * 数据处理器
      *
      * @param value 数据值
@@ -937,7 +889,7 @@ public class ExcelUtil<T> {
     public String dataFormatHandlerAdapter(Object value, Excel excel) {
         try {
             Object instance = excel.handler().newInstance();
-            Method formatMethod = excel.handler().getMethod("format", new Class[]{Object.class, String[].class});
+            Method formatMethod = excel.handler().getMethod("format", Object.class, String[].class);
             value = formatMethod.invoke(instance, value, excel.args());
         } catch (Exception e) {
             log.error("不能格式化数据 " + excel.handler(), e.getMessage());
@@ -1216,7 +1168,7 @@ public class ExcelUtil<T> {
     public Collection<?> getListCellValue(Object obj) {
         Object value;
         try {
-            value = subMethod.invoke(obj, new Object[]{});
+            value = subMethod.invoke(obj);
         } catch (Exception e) {
             return new ArrayList<Object>();
         }
@@ -1236,7 +1188,7 @@ public class ExcelUtil<T> {
         getMethodName.append(name.substring(1));
         Method method = null;
         try {
-            method = pojoClass.getMethod(getMethodName.toString(), new Class[]{});
+            method = pojoClass.getMethod(getMethodName.toString());
         } catch (Exception e) {
             log.error("获取对象异常{}", e.getMessage());
         }

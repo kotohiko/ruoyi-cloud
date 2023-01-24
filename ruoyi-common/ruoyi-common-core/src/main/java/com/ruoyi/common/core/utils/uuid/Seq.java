@@ -1,9 +1,9 @@
 package com.ruoyi.common.core.utils.uuid;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.ruoyi.common.core.utils.DateUtils;
 import com.ruoyi.common.core.utils.StringUtils;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author ruoyi 序列生成类
@@ -16,13 +16,13 @@ public class Seq {
     public static final String uploadSeqType = "UPLOAD";
 
     // 通用接口序列数
-    private static AtomicInteger commSeq = new AtomicInteger(1);
+    private static final AtomicInteger commSeq = new AtomicInteger(1);
 
     // 上传接口序列数
-    private static AtomicInteger uploadSeq = new AtomicInteger(1);
+    private static final AtomicInteger uploadSeq = new AtomicInteger(1);
 
     // 机器标识
-    private static String machineCode = "A";
+    private static final String machineCode = "A";
 
     /**
      * 获取通用序列号

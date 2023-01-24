@@ -11,6 +11,7 @@ import com.ruoyi.system.domain.vo.TreeSelect;
  * @author ruoyi
  */
 public interface ISysDeptService {
+
     /**
      * 查询部门管理数据
      *

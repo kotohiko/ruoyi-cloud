@@ -20,7 +20,7 @@ import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.model.LoginUser;
 
 /**
- * Token 权限验证，逻辑实现类
+ * Token权限验证，逻辑实现类
  *
  * @author ruoyi
  */
@@ -113,7 +113,6 @@ public class AuthLogic {
      * 验证用户是否具备某权限, 如果验证未通过，则抛出异常: NotPermissionException
      *
      * @param permission 权限字符串
-     * @return 用户是否具备某权限
      */
     public void checkPermi(String permission) {
         if (!hasPermi(getPermiList(), permission)) {

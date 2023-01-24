@@ -1,20 +1,20 @@
 package com.ruoyi.common.security.aspect;
 
-import java.lang.reflect.Method;
-
+import com.ruoyi.common.security.annotation.RequiresLogin;
+import com.ruoyi.common.security.annotation.RequiresPermissions;
+import com.ruoyi.common.security.annotation.RequiresRoles;
+import com.ruoyi.common.security.auth.AuthUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.security.annotation.RequiresLogin;
-import com.ruoyi.common.security.annotation.RequiresPermissions;
-import com.ruoyi.common.security.annotation.RequiresRoles;
-import com.ruoyi.common.security.auth.AuthUtil;
+
+import java.lang.reflect.Method;
 
 /**
- * 基于 Spring Aop 的注解鉴权
+ * 基于Spring AOP的注解鉴权
  *
  * @author kong
  */
@@ -31,9 +31,7 @@ public class PreAuthorizeAspect {
     /**
      * 定义AOP签名 (切入所有使用鉴权注解的方法)
      */
-    public static final String POINTCUT_SIGN = " @annotation(com.ruoyi.common.security.annotation.RequiresLogin) || "
-            + "@annotation(com.ruoyi.common.security.annotation.RequiresPermissions) || "
-            + "@annotation(com.ruoyi.common.security.annotation.RequiresRoles)";
+    public static final String POINTCUT_SIGN = " @annotation(com.ruoyi.common.security.annotation.RequiresLogin) || " + "@annotation(com.ruoyi.common.security.annotation.RequiresPermissions) || " + "@annotation(com.ruoyi.common.security.annotation.RequiresRoles)";
 
     /**
      * 声明AOP签名
@@ -54,12 +52,8 @@ public class PreAuthorizeAspect {
         // 注解鉴权
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         checkMethodAnnotation(signature.getMethod());
-        try {
-            // 执行原有逻辑
-            return joinPoint.proceed();
-        } catch (Throwable e) {
-            throw e;
-        }
+        // 执行原有逻辑
+        return joinPoint.proceed();
     }
 
     /**

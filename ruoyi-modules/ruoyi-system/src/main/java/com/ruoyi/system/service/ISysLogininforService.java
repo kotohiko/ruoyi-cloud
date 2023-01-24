@@ -10,6 +10,7 @@ import com.ruoyi.system.api.domain.SysLogininfor;
  * @author ruoyi
  */
 public interface ISysLogininforService {
+
     /**
      * 新增系统登录日志
      *

@@ -10,6 +10,7 @@ import com.ruoyi.system.api.domain.SysDictData;
  * @author ruoyi
  */
 public interface ISysDictDataService {
+
     /**
      * 根据条件分页查询字典数据
      *

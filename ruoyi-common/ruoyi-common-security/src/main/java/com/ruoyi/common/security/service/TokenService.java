@@ -19,7 +19,7 @@ import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.model.LoginUser;
 
 /**
- * token验证处理
+ * Token验证处理
  *
  * @author ruoyi
  */
@@ -125,7 +125,7 @@ public class TokenService {
     /**
      * 验证令牌有效期，相差不足120分钟，自动刷新缓存
      *
-     * @param loginUser
+     * @param loginUser 登录用户对象
      */
     public void verifyToken(LoginUser loginUser) {
         long expireTime = loginUser.getExpireTime();

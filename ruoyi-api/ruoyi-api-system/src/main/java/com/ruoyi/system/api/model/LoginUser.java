@@ -1,9 +1,10 @@
 package com.ruoyi.system.api.model;
 
+import com.ruoyi.system.api.domain.SysUser;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
-
-import com.ruoyi.system.api.domain.SysUser;
 
 /**
  * 用户信息
@@ -12,6 +13,7 @@ import com.ruoyi.system.api.domain.SysUser;
  */
 public class LoginUser implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

@@ -12,7 +12,7 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 
 /**
- * feign 请求拦截器
+ * Feign请求拦截器
  *
  * @author ruoyi
  */

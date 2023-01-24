@@ -1,18 +1,9 @@
 package com.ruoyi.common.core.utils;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.alibaba.fastjson2.JSON;
+import com.ruoyi.common.core.constant.Constants;
+import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.core.text.Convert;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,11 +13,21 @@ import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import com.alibaba.fastjson2.JSON;
-import com.ruoyi.common.core.constant.Constants;
-import com.ruoyi.common.core.domain.R;
-import com.ruoyi.common.core.text.Convert;
 import reactor.core.publisher.Mono;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 客户端工具类
@@ -209,11 +210,7 @@ public class ServletUtils {
      * @return 编码后的内容
      */
     public static String urlEncode(String str) {
-        try {
-            return URLEncoder.encode(str, Constants.UTF8);
-        } catch (UnsupportedEncodingException e) {
-            return StringUtils.EMPTY;
-        }
+        return URLEncoder.encode(str, StandardCharsets.UTF_8);
     }
 
     /**
@@ -223,11 +220,7 @@ public class ServletUtils {
      * @return 解码后的内容
      */
     public static String urlDecode(String str) {
-        try {
-            return URLDecoder.decode(str, Constants.UTF8);
-        } catch (UnsupportedEncodingException e) {
-            return StringUtils.EMPTY;
-        }
+        return URLDecoder.decode(str, StandardCharsets.UTF_8);
     }
 
     /**

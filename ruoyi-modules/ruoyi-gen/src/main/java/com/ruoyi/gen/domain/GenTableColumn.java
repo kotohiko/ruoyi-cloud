@@ -5,12 +5,16 @@ import javax.validation.constraints.NotBlank;
 import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.core.web.domain.BaseEntity;
 
+import java.io.Serial;
+
 /**
  * 代码生成业务字段表 gen_table_column
  *
  * @author ruoyi
  */
 public class GenTableColumn extends BaseEntity {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -331,13 +335,13 @@ public class GenTableColumn extends BaseEntity {
 
     public String readConverterExp() {
         String remarks = StringUtils.substringBetween(this.columnComment, "（", "）");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (StringUtils.isNotEmpty(remarks)) {
             for (String value : remarks.split(" ")) {
                 if (StringUtils.isNotEmpty(value)) {
                     Object startStr = value.subSequence(0, 1);
                     String endStr = value.substring(1);
-                    sb.append("").append(startStr).append("=").append(endStr).append(",");
+                    sb.append(startStr).append("=").append(endStr).append(",");
                 }
             }
             return sb.deleteCharAt(sb.length() - 1).toString();

@@ -1,9 +1,9 @@
 package com.ruoyi.common.core.text;
 
+import com.ruoyi.common.core.utils.StringUtils;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-
-import com.ruoyi.common.core.utils.StringUtils;
 
 /**
  * 字符集工具类
@@ -27,11 +27,11 @@ public class CharsetKit {
     /**
      * ISO-8859-1
      */
-    public static final Charset CHARSET_ISO_8859_1 = Charset.forName(ISO_8859_1);
+    public static final Charset CHARSET_ISO_8859_1 = StandardCharsets.ISO_8859_1;
     /**
      * UTF-8
      */
-    public static final Charset CHARSET_UTF_8 = Charset.forName(UTF_8);
+    public static final Charset CHARSET_UTF_8 = StandardCharsets.UTF_8;
     /**
      * GBK
      */
