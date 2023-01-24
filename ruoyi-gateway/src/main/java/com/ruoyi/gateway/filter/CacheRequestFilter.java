@@ -1,8 +1,5 @@
 package com.ruoyi.gateway.filter;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
@@ -12,6 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 获取body请求数据（解决流不能重复读取问题）
@@ -40,6 +40,11 @@ public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheReques
         return new OrderedGatewayFilter(cacheRequestGatewayFilter, order);
     }
 
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Collections.singletonList("order");
+    }
+
     public static class CacheRequestGatewayFilter implements GatewayFilter {
         @Override
         public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -55,11 +60,6 @@ public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheReques
                 return chain.filter(exchange.mutate().request(serverHttpRequest).build());
             });
         }
-    }
-
-    @Override
-    public List<String> shortcutFieldOrder() {
-        return Collections.singletonList("order");
     }
 
     static class Config {

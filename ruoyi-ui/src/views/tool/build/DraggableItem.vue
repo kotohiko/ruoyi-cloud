@@ -27,19 +27,19 @@ const layouts = {
     let className = this.activeId === element.formId ? 'drawing-item active-from-item' : 'drawing-item'
     if (this.formConf.unFocusedComponentBorder) className += ' unfocus-bordered'
     return (
-      <el-col span={element.span} class={className}
-              nativeOnClick={event => {
-                activeItem(element);
-                event.stopPropagation()
-              }}>
-        <el-form-item label-width={element.labelWidth ? `${element.labelWidth}px` : null}
-                      label={element.label} required={element.required}>
-          <render key={element.renderKey} conf={element} onInput={event => {
-            this.$set(element, 'defaultValue', event)
-          }}/>
-        </el-form-item>
-        {components.itemBtns.apply(this, arguments)}
-      </el-col>
+        <el-col span={element.span} class={className}
+                nativeOnClick={event => {
+                  activeItem(element);
+                  event.stopPropagation()
+                }}>
+          <el-form-item label-width={element.labelWidth ? `${element.labelWidth}px` : null}
+                        label={element.label} required={element.required}>
+            <render key={element.renderKey} conf={element} onInput={event => {
+              this.$set(element, 'defaultValue', event)
+            }}/>
+          </el-form-item>
+          {components.itemBtns.apply(this, arguments)}
+        </el-col>
     )
   },
   rowFormItem(h, element, index, parent) {
@@ -52,19 +52,19 @@ const layouts = {
       </el-row>
     }
     return (
-      <el-col span={element.span}>
-        <el-row gutter={element.gutter} class={className}
-                nativeOnClick={event => {
-                  activeItem(element);
-                  event.stopPropagation()
-                }}>
-          <span class="component-name">{element.componentName}</span>
-          <draggable list={element.children} animation={340} group="componentsGroup" class="drag-wrapper">
-            {child}
-          </draggable>
-          {components.itemBtns.apply(this, arguments)}
-        </el-row>
-      </el-col>
+        <el-col span={element.span}>
+          <el-row gutter={element.gutter} class={className}
+                  nativeOnClick={event => {
+                    activeItem(element);
+                    event.stopPropagation()
+                  }}>
+            <span class="component-name">{element.componentName}</span>
+            <draggable list={element.children} animation={340} group="componentsGroup" class="drag-wrapper">
+              {child}
+            </draggable>
+            {components.itemBtns.apply(this, arguments)}
+          </el-row>
+        </el-col>
     )
   }
 }

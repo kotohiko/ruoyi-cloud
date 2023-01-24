@@ -13,17 +13,17 @@
             输入型组件
           </div>
           <draggable
-            class="components-draggable"
-            :list="inputComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
-            :clone="cloneComponent"
-            draggable=".components-item"
-            :sort="false"
-            @end="onEnd"
+              :clone="cloneComponent"
+              :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+              :list="inputComponents"
+              :sort="false"
+              class="components-draggable"
+              draggable=".components-item"
+              @end="onEnd"
           >
             <div
-              v-for="(element, index) in inputComponents" :key="index" class="components-item"
-              @click="addComponent(element)"
+                v-for="(element, index) in inputComponents" :key="index" class="components-item"
+                @click="addComponent(element)"
             >
               <div class="components-body">
                 <svg-icon :icon-class="element.tagIcon"/>
@@ -36,19 +36,19 @@
             选择型组件
           </div>
           <draggable
-            class="components-draggable"
-            :list="selectComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
-            :clone="cloneComponent"
-            draggable=".components-item"
-            :sort="false"
-            @end="onEnd"
+              :clone="cloneComponent"
+              :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+              :list="selectComponents"
+              :sort="false"
+              class="components-draggable"
+              draggable=".components-item"
+              @end="onEnd"
           >
             <div
-              v-for="(element, index) in selectComponents"
-              :key="index"
-              class="components-item"
-              @click="addComponent(element)"
+                v-for="(element, index) in selectComponents"
+                :key="index"
+                class="components-item"
+                @click="addComponent(element)"
             >
               <div class="components-body">
                 <svg-icon :icon-class="element.tagIcon"/>
@@ -61,13 +61,13 @@
             布局型组件
           </div>
           <draggable
-            class="components-draggable" :list="layoutComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }" :clone="cloneComponent"
-            draggable=".components-item" :sort="false" @end="onEnd"
+              :clone="cloneComponent" :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+              :list="layoutComponents" :sort="false"
+              class="components-draggable" draggable=".components-item" @end="onEnd"
           >
             <div
-              v-for="(element, index) in layoutComponents" :key="index" class="components-item"
-              @click="addComponent(element)"
+                v-for="(element, index) in layoutComponents" :key="index" class="components-item"
+                @click="addComponent(element)"
             >
               <div class="components-body">
                 <svg-icon :icon-class="element.tagIcon"/>
@@ -92,25 +92,25 @@
         </el-button>
       </div>
       <el-scrollbar class="center-scrollbar">
-        <el-row class="center-board-row" :gutter="formConf.gutter">
+        <el-row :gutter="formConf.gutter" class="center-board-row">
           <el-form
-            :size="formConf.size"
-            :label-position="formConf.labelPosition"
-            :disabled="formConf.disabled"
-            :label-width="formConf.labelWidth + 'px'"
+              :disabled="formConf.disabled"
+              :label-position="formConf.labelPosition"
+              :label-width="formConf.labelWidth + 'px'"
+              :size="formConf.size"
           >
-            <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
+            <draggable :animation="340" :list="drawingList" class="drawing-board" group="componentsGroup">
               <draggable-item
-                v-for="(element, index) in drawingList"
-                :key="element.renderKey"
-                :drawing-list="drawingList"
-                :element="element"
-                :index="index"
-                :active-id="activeId"
-                :form-conf="formConf"
-                @activeItem="activeFormItem"
-                @copyItem="drawingItemCopy"
-                @deleteItem="drawingItemDelete"
+                  v-for="(element, index) in drawingList"
+                  :key="element.renderKey"
+                  :active-id="activeId"
+                  :drawing-list="drawingList"
+                  :element="element"
+                  :form-conf="formConf"
+                  :index="index"
+                  @activeItem="activeFormItem"
+                  @copyItem="drawingItemCopy"
+                  @deleteItem="drawingItemDelete"
               />
             </draggable>
             <div v-show="!drawingList.length" class="empty-info">
@@ -122,17 +122,17 @@
     </div>
 
     <right-panel
-      :active-data="activeData"
-      :form-conf="formConf"
-      :show-field="!!drawingList.length"
-      @tag-change="tagChange"
+        :active-data="activeData"
+        :form-conf="formConf"
+        :show-field="!!drawingList.length"
+        @tag-change="tagChange"
     />
 
     <code-type-dialog
-      :visible.sync="dialogVisible"
-      title="选择生成类型"
-      :show-file-name="showFileName"
-      @confirm="generate"
+        :show-file-name="showFileName"
+        :visible.sync="dialogVisible"
+        title="选择生成类型"
+        @confirm="generate"
     />
     <input id="copyNode" type="hidden">
   </div>
@@ -144,9 +144,9 @@ import beautifier from 'js-beautify'
 import ClipboardJS from 'clipboard'
 import render from '@/utils/generator/render'
 import RightPanel from './RightPanel'
-import {inputComponents, selectComponents, layoutComponents, formConf} from '@/utils/generator/config'
+import {formConf, inputComponents, layoutComponents, selectComponents} from '@/utils/generator/config'
 import {beautifierConf, titleCase} from '@/utils/index'
-import {makeUpHtml, vueTemplate, vueScript, cssStyle} from '@/utils/generator/html'
+import {cssStyle, makeUpHtml, vueScript, vueTemplate} from '@/utils/generator/html'
 import {makeUpJs} from '@/utils/generator/js'
 import {makeUpCss} from '@/utils/generator/css'
 import drawingDefault from '@/utils/generator/drawingDefault'
@@ -196,9 +196,9 @@ export default {
     // eslint-disable-next-line func-names
     'activeData.label': function (val, oldVal) {
       if (
-        this.activeData.placeholder === undefined
-        || !this.activeData.tag
-        || oldActiveId !== this.activeId
+          this.activeData.placeholder === undefined
+          || !this.activeData.tag
+          || oldActiveId !== this.activeId
       ) {
         return
       }
@@ -286,9 +286,9 @@ export default {
     },
     empty() {
       this.$confirm('确定要清空所有组件吗？', '提示', {type: 'warning'}).then(
-        () => {
-          this.drawingList = []
-        }
+          () => {
+            this.drawingList = []
+          }
       )
     },
     drawingItemCopy(item, parent) {
@@ -352,7 +352,7 @@ export default {
       delete this.activeData.document
       Object.keys(newTag).forEach(key => {
         if (this.activeData[key] !== undefined
-          && typeof this.activeData[key] === typeof newTag[key]) {
+            && typeof this.activeData[key] === typeof newTag[key]) {
           newTag[key] = this.activeData[key]
         }
       })

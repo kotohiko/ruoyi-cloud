@@ -54,6 +54,10 @@ public class ExcelUtil<T> {
      */
     private static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("######0.00");
     /**
+     * 统计列表
+     */
+    private final Map<Integer, Double> statistics = new HashMap<Integer, Double>();
+    /**
      * 实体对象
      */
     public Class<T> clazz;
@@ -117,10 +121,6 @@ public class ExcelUtil<T> {
      * 对象的子列表属性
      */
     private List<Field> subFields;
-    /**
-     * 统计列表
-     */
-    private final Map<Integer, Double> statistics = new HashMap<Integer, Double>();
 
     public ExcelUtil(Class<T> clazz) {
         this.clazz = clazz;

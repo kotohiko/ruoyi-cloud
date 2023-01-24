@@ -1,12 +1,5 @@
 package com.ruoyi.common.security.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.core.constant.CacheConstants;
 import com.ruoyi.common.core.constant.SecurityConstants;
 import com.ruoyi.common.core.utils.JwtUtils;
@@ -17,6 +10,13 @@ import com.ruoyi.common.core.utils.uuid.IdUtils;
 import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.model.LoginUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Token验证处理
@@ -26,18 +26,14 @@ import com.ruoyi.system.api.model.LoginUser;
 @Component
 public class TokenService {
 
-    @Autowired
-    private RedisService redisService;
-
     protected static final long MILLIS_SECOND = 1000;
-
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-
+    private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;
     private final static long expireTime = CacheConstants.EXPIRATION;
 
     private final static String ACCESS_TOKEN = CacheConstants.LOGIN_TOKEN_KEY;
-
-    private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 创建令牌
@@ -75,6 +71,15 @@ public class TokenService {
     }
 
     /**
+     * 设置用户身份信息
+     */
+    public void setLoginUser(LoginUser loginUser) {
+        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())) {
+            refreshToken(loginUser);
+        }
+    }
+
+    /**
      * 获取用户身份信息
      *
      * @return 用户信息
@@ -101,15 +106,6 @@ public class TokenService {
         } catch (Exception ignored) {
         }
         return user;
-    }
-
-    /**
-     * 设置用户身份信息
-     */
-    public void setLoginUser(LoginUser loginUser) {
-        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())) {
-            refreshToken(loginUser);
-        }
     }
 
     /**

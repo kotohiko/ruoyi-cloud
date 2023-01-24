@@ -1,12 +1,5 @@
 package com.ruoyi.common.datascope.aspect;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.core.context.SecurityContextHolder;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.core.utils.StringUtils;
@@ -16,6 +9,13 @@ import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.domain.SysRole;
 import com.ruoyi.system.api.domain.SysUser;
 import com.ruoyi.system.api.model.LoginUser;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数据过滤处理
@@ -55,25 +55,6 @@ public class DataScopeAspect {
      * 数据权限过滤关键字
      */
     public static final String DATA_SCOPE = "dataScope";
-
-    @Before("@annotation(controllerDataScope)")
-    public void doBefore(JoinPoint point, DataScope controllerDataScope) {
-        clearDataScope(point);
-        handleDataScope(point, controllerDataScope);
-    }
-
-    protected void handleDataScope(final JoinPoint joinPoint, DataScope controllerDataScope) {
-        // 获取当前的用户
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNotNull(loginUser)) {
-            SysUser currentUser = loginUser.getSysUser();
-            // 如果是超级管理员，则不过滤数据
-            if (StringUtils.isNotNull(currentUser) && !currentUser.isAdmin()) {
-                String permission = StringUtils.defaultIfEmpty(controllerDataScope.permission(), SecurityContextHolder.getPermission());
-                dataScopeFilter(joinPoint, currentUser, controllerDataScope.deptAlias(), controllerDataScope.userAlias(), permission);
-            }
-        }
-    }
 
     /**
      * 数据范围过滤
@@ -120,6 +101,25 @@ public class DataScopeAspect {
             Object params = joinPoint.getArgs()[0];
             if (StringUtils.isNotNull(params) && params instanceof BaseEntity baseEntity) {
                 baseEntity.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
+            }
+        }
+    }
+
+    @Before("@annotation(controllerDataScope)")
+    public void doBefore(JoinPoint point, DataScope controllerDataScope) {
+        clearDataScope(point);
+        handleDataScope(point, controllerDataScope);
+    }
+
+    protected void handleDataScope(final JoinPoint joinPoint, DataScope controllerDataScope) {
+        // 获取当前的用户
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        if (StringUtils.isNotNull(loginUser)) {
+            SysUser currentUser = loginUser.getSysUser();
+            // 如果是超级管理员，则不过滤数据
+            if (StringUtils.isNotNull(currentUser) && !currentUser.isAdmin()) {
+                String permission = StringUtils.defaultIfEmpty(controllerDataScope.permission(), SecurityContextHolder.getPermission());
+                dataScopeFilter(joinPoint, currentUser, controllerDataScope.deptAlias(), controllerDataScope.userAlias(), permission);
             }
         }
     }

@@ -1,9 +1,9 @@
 <template>
   <el-color-picker
-    v-model="theme"
-    :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d', ]"
-    class="theme-picker"
-    popper-class="theme-picker-dropdown"
+      v-model="theme"
+      :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d', ]"
+      class="theme-picker"
+      popper-class="theme-picker-dropdown"
   />
 </template>
 
@@ -72,10 +72,10 @@ export default {
       chalkHandler()
 
       const styles = [].slice.call(document.querySelectorAll('style'))
-        .filter(style => {
-          const text = style.innerText
-          return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
-        })
+          .filter(style => {
+            const text = style.innerText
+            return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+          })
       styles.forEach(style => {
         const {innerText} = style
         if (typeof innerText !== 'string') return

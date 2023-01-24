@@ -1,13 +1,13 @@
 package com.ruoyi.gateway.filter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-
+import com.ruoyi.common.core.utils.ServletUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.core.utils.ServletUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * 黑名单过滤器
@@ -16,6 +16,10 @@ import com.ruoyi.common.core.utils.ServletUtils;
  */
 @Component
 public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUrlFilter.Config> {
+
+    public BlackListUrlFilter() {
+        super(Config.class);
+    }
 
     @Override
     public GatewayFilter apply(Config config) {
@@ -30,14 +34,9 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
         };
     }
 
-    public BlackListUrlFilter() {
-        super(Config.class);
-    }
-
     public static class Config {
-        private List<String> blacklistUrl;
-
         private final List<Pattern> blacklistUrlPattern = new ArrayList<>();
+        private List<String> blacklistUrl;
 
         public boolean matchBlacklist(String url) {
             return !blacklistUrlPattern.isEmpty() && blacklistUrlPattern.stream().anyMatch(p -> p.matcher(url).find());

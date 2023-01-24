@@ -281,13 +281,7 @@
 </template>
 
 <script setup name="${BusinessName}">
-  import {
-    list${BusinessName},
-    get${BusinessName},
-    del${BusinessName},
-    add${BusinessName},
-    update${BusinessName}
-  } from "@/api/${moduleName}/${businessName}";
+  import {get${BusinessName}, list${BusinessName}} from "@/api/";
 
   const {proxy} = getCurrentInstance();
       #if(${dicts} != '')
@@ -459,16 +453,16 @@
     [[$]]
     #refs["${businessName}Ref"].validate(valid => {
       if (valid) {
-        #foreach($column in $columns)
-        #if($column.htmlType == "checkbox")
-        form.value.$column.javaField = form.value.$
-        {
-          column.javaField
-        }
-      .
-        join(",");
-        #end
-        #end
+          #foreach($column in $columns)
+              #if($column.htmlType == "checkbox")
+                form.value.$column.javaField = form.value.$
+                {
+                  column.javaField
+                }
+              .
+                join(",");
+              #end
+          #end
         if (form.value.${
           pkColumn.javaField
         }
