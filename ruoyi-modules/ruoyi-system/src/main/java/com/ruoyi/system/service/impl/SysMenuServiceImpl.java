@@ -411,9 +411,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     /**
      * 递归列表
-     *
-     * @param list
-     * @param t
      */
     private void recursionFn(List<SysMenu> list, SysMenu t) {
         // 得到子节点列表
@@ -448,8 +445,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     /**
      * 内链域名特殊字符替换
-     *
-     * @return
      */
     public String innerLinkReplaceEach(String path) {
         return StringUtils.replaceEach(path, new String[]{Constants.HTTP, Constants.HTTPS, Constants.WWW, "."}, new String[]{"", "", "", "/"});
