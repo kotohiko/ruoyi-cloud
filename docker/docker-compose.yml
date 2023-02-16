@@ -1,15 +1,15 @@
 version: '3.8'
 services:
   ruoyi-nacos:
-    container_name: ruoyi-nacos
+    container_name: ruoyi-command.txt
     image: nacos/nacos-server
     build:
       context: ./nacos
     environment:
       - MODE=standalone
     volumes:
-      - ./nacos/logs/:/home/nacos/logs
-      - ./nacos/conf/application.properties:/home/nacos/conf/application.properties
+      - ./command.txt/logs/:/home/command.txt/logs
+      - ./command.txt/conf/application.properties:/home/command.txt/conf/application.properties
     ports:
       - "8848:8848"
       - "9848:9848"

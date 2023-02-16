@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class CacheConstants {
+
     /**
      * 缓存有效期，默认720（分钟）
      */

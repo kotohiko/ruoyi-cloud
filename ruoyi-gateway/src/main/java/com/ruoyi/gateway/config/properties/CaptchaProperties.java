@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @RefreshScope
 @ConfigurationProperties(prefix = "security.captcha")
 public class CaptchaProperties {
+
     /**
      * 验证码开关
      */

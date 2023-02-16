@@ -16,6 +16,7 @@ import java.util.List;
 @RefreshScope
 @ConfigurationProperties(prefix = "security.xss")
 public class XssProperties {
+
     /**
      * Xss开关
      */

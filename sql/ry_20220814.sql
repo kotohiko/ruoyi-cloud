@@ -246,8 +246,8 @@ INSERT INTO sys_menu
 VALUES ('111', 'Sentinel控制台', '2', '3', 'http://localhost:8718', '', '', 0, 0, 'C', '0', '0',
         'monitor:sentinel:list', 'sentinel', 'admin', SYSDATE(), '', NULL, '流量控制菜单');
 INSERT INTO sys_menu
-VALUES ('112', 'Nacos控制台', '2', '4', 'http://localhost:8848/nacos', '', '', 0, 0, 'C', '0', '0',
-        'monitor:nacos:list', 'nacos', 'admin', SYSDATE(), '', NULL, '服务治理菜单');
+VALUES ('112', 'Nacos控制台', '2', '4', 'http://localhost:8848/command.txt', '', '', 0, 0, 'C', '0', '0',
+        'monitor:command.txt:list', 'command.txt', 'admin', SYSDATE(), '', NULL, '服务治理菜单');
 INSERT INTO sys_menu
 VALUES ('113', 'Admin控制台', '2', '5', 'http://localhost:9100/login', '', '', 0, 0, 'C', '0', '0',
         'monitor:server:list', 'server', 'admin', SYSDATE(), '', NULL, '服务监控菜单');

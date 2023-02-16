@@ -31,7 +31,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    // 排除过滤的URI地址，nacos自行添加
+    // 排除过滤的URI地址，Nacos自行添加
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 
