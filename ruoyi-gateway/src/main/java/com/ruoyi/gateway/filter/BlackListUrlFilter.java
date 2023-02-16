@@ -24,18 +24,18 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-
             String url = exchange.getRequest().getURI().getPath();
             if (config.matchBlacklist(url)) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), "请求地址不允许访问");
             }
-
             return chain.filter(exchange);
         };
     }
 
     public static class Config {
+
         private final List<Pattern> blacklistUrlPattern = new ArrayList<>();
+
         private List<String> blacklistUrl;
 
         public boolean matchBlacklist(String url) {
