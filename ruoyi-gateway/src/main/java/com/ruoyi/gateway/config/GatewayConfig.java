@@ -18,5 +18,4 @@ public class GatewayConfig {
     public SentinelFallbackHandler sentinelGatewayExceptionHandler() {
         return new SentinelFallbackHandler();
     }
-
 }

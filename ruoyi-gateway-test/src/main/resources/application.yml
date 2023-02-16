@@ -2,15 +2,29 @@ server:
   port: 8080
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: gateway-test
   cloud:
+    sentinel:
+      scg:
+        fallback:
+          mode: response
+          response-body: '{"code":403,"msg":"请求超过最大数，请稍后再试"}'
     gateway:
       routes:
         # 系统模块
         - id: ruoyi-system
-          uri: http://localhost:9201/
+          uri: lb://ruoyi-system
           predicates:
             - Path=/system/**
+          filters:
+            - StripPrefix=1
+        # 代码生成
+        - id: ruoyi-gen
+          uri: lb://ruoyi-gen
+          predicates:
+            - Path=/code/**
           filters:
             - StripPrefix=1

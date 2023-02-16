@@ -38,7 +38,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Autowired
     private RedisService redisService;
 
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
@@ -109,8 +108,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         String token = request.getHeaders().getFirst(TokenConstants.AUTHENTICATION);
         // 如果前端设置了令牌前缀，则裁剪掉前缀
         if (StringUtils.isNotEmpty(token)) {
-            assert token != null;
-            if (token.startsWith(TokenConstants.PREFIX)) {
+            if (token != null && token.startsWith(TokenConstants.PREFIX)) {
                 token = token.replaceFirst(TokenConstants.PREFIX, StringUtils.EMPTY);
             }
         }
