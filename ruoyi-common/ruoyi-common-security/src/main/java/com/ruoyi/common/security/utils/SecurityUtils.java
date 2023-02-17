@@ -9,6 +9,7 @@ import com.ruoyi.system.api.model.LoginUser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * 权限获取工具类
@@ -46,23 +47,23 @@ public class SecurityUtils {
     }
 
     /**
-     * 获取请求token
+     * 获取请求Token
      */
     public static String getToken() {
-        return getToken(ServletUtils.getRequest());
+        return getToken(Objects.requireNonNull(ServletUtils.getRequest()));
     }
 
     /**
-     * 根据request获取请求token
+     * 根据request获取请求Token
      */
     public static String getToken(HttpServletRequest request) {
-        // 从header获取token标识
+        // 从header获取Token标识
         String token = request.getHeader(TokenConstants.AUTHENTICATION);
         return replaceTokenPrefix(token);
     }
 
     /**
-     * 裁剪token前缀
+     * 裁剪Token前缀
      */
     public static String replaceTokenPrefix(String token) {
         // 如果前端设置了令牌前缀，则裁剪掉前缀

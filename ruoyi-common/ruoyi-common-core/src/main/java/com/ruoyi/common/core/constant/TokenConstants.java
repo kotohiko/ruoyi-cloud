@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class TokenConstants {
+
     /**
      * 令牌自定义标识
      */
@@ -20,5 +21,4 @@ public class TokenConstants {
      * 令牌秘钥
      */
     public final static String SECRET = "abcdefghijklmnopqrstuvwxyz";
-
 }

@@ -31,7 +31,7 @@ import java.nio.charset.StandardCharsets;
 @ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
 
-    // 跨站脚本的XSS配置，nacos自行添加
+    // 跨站脚本的XSS配置，Nacos自行添加
     @Autowired
     private XssProperties xss;
 
@@ -93,7 +93,6 @@ public class XssFilter implements GlobalFilter, Ordered {
                 httpHeaders.set(HttpHeaders.TRANSFER_ENCODING, "chunked");
                 return httpHeaders;
             }
-
         };
     }
 

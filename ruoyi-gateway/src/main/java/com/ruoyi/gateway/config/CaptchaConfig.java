@@ -80,5 +80,4 @@ public class CaptchaConfig {
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
     }
-
 }

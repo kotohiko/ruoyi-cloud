@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
  * @author ruoyi
  */
 public class SentinelFallbackHandler implements WebExceptionHandler {
+
     private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
         serverHttpResponse.getHeaders().add("Content-Type", "application/json;charset=UTF-8");

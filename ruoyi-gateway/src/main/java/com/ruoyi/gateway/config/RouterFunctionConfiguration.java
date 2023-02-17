@@ -23,9 +23,6 @@ public class RouterFunctionConfiguration {
     @SuppressWarnings("rawtypes")
     @Bean
     public RouterFunction routerFunction() {
-        return RouterFunctions.route(
-                RequestPredicates.GET("/code").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
-                validateCodeHandler);
+        return RouterFunctions.route(RequestPredicates.GET("/code").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), validateCodeHandler);
     }
-
 }

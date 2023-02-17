@@ -30,6 +30,7 @@ import java.util.Map;
 @RequestMapping("/gen")
 @RestController
 public class GenController extends BaseController {
+
     @Autowired
     private IGenTableService genTableService;
 

@@ -52,5 +52,4 @@ public class BlackListUrlFilter extends AbstractGatewayFilterFactory<BlackListUr
             this.blacklistUrl.forEach(url -> this.blacklistUrlPattern.add(Pattern.compile(url.replaceAll("\\*\\*", "(.*?)"), Pattern.CASE_INSENSITIVE)));
         }
     }
-
 }

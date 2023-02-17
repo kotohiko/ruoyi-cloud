@@ -73,5 +73,4 @@ public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheReques
             this.order = order;
         }
     }
-
 }

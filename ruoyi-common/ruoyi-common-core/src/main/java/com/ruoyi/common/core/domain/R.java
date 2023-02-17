@@ -2,6 +2,7 @@ package com.ruoyi.common.core.domain;
 
 import com.ruoyi.common.core.constant.Constants;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,11 +16,15 @@ public class R<T> implements Serializable {
      * 成功
      */
     public static final int SUCCESS = Constants.SUCCESS;
+
     /**
      * 失败
      */
     public static final int FAIL = Constants.FAIL;
+
+    @Serial
     private static final long serialVersionUID = 1L;
+
     private int code;
 
     private String msg;
