@@ -232,8 +232,6 @@
         <module>ruoyi-modules</module>
         <module>ruoyi-api</module>
         <module>ruoyi-common</module>
-        <module>ruoyi-gateway-test</module>
-        <module>ruoyi-config</module>
     </modules>
     <packaging>pom</packaging>
 
