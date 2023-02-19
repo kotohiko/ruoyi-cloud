@@ -91,7 +91,7 @@ public class TokenService {
      * @return 用户信息
      */
     public LoginUser getLoginUser(String token) {
-        LoginUser user = null;
+        LoginUser user;
         try {
             if (StringUtils.isNotEmpty(token)) {
                 String userkey = JwtUtils.getUserKey(token);
@@ -100,7 +100,7 @@ public class TokenService {
             }
         } catch (Exception ignored) {
         }
-        return user;
+        return null;
     }
 
     /**
@@ -125,7 +125,7 @@ public class TokenService {
     /**
      * 验证令牌有效期，相差不足120分钟，自动刷新缓存
      *
-     * @param loginUser
+     * @param loginUser 用户信息
      */
     public void verifyToken(LoginUser loginUser) {
         long expireTime = loginUser.getExpireTime();

@@ -26,7 +26,7 @@ public class AuthUtil {
     /**
      * 会话注销，根据指定Token
      *
-     * @param tokenValue 指定token
+     * @param token 指定Token
      */
     public static void logoutByToken(String token) {
         authLogic.logoutByToken(token);
