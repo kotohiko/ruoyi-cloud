@@ -41,6 +41,7 @@ public class LogAspect {
      */
     public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+
     @Autowired
     private AsyncLogService asyncLogService;
 
