@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class HttpStatus {
+
     /**
      * 操作成功
      */

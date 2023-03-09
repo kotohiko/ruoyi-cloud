@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class UserConstants {
+
     /**
      * 平台内系统用户的唯一标志
      */

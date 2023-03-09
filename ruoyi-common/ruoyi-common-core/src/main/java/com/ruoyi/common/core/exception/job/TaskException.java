@@ -1,11 +1,15 @@
 package com.ruoyi.common.core.exception.job;
 
+import java.io.Serial;
+
 /**
  * 计划策略异常
  *
  * @author ruoyi
  */
 public class TaskException extends Exception {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Code code;

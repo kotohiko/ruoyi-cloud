@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class SecurityConstants {
+
     /**
      * 用户ID字段
      */

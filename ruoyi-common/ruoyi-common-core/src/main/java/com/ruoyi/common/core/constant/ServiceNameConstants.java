@@ -6,6 +6,7 @@ package com.ruoyi.common.core.constant;
  * @author ruoyi
  */
 public class ServiceNameConstants {
+
     /**
      * 认证服务的serviceid
      */
