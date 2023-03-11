@@ -39,8 +39,6 @@ public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigu
 
     /**
      * 聚合其他服务接口
-     *
-     * @return
      */
     @Override
     public List<SwaggerResource> get() {
