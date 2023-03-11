@@ -13,6 +13,7 @@ import java.util.Objects;
  * @author ruoyi
  */
 public class FileTypeUtils {
+
     /**
      * 获取文件类型
      * <p>

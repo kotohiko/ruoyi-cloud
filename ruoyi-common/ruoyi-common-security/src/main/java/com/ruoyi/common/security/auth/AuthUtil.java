@@ -5,7 +5,7 @@ import com.ruoyi.common.security.annotation.RequiresRoles;
 import com.ruoyi.system.api.model.LoginUser;
 
 /**
- * Token 权限验证工具类
+ * Token权限验证工具类
  *
  * @author ruoyi
  */

@@ -103,8 +103,8 @@ public class RedisService {
      *
      * @param key
      */
-    public boolean deleteObject(final String key) {
-        return redisTemplate.delete(key);
+    public void deleteObject(final String key) {
+        redisTemplate.delete(key);
     }
 
     /**
@@ -112,8 +112,8 @@ public class RedisService {
      *
      * @param collection 多个对象
      */
-    public boolean deleteObject(final Collection collection) {
-        return redisTemplate.delete(collection) > 0;
+    public void deleteObject(final Collection collection) {
+        redisTemplate.delete(collection);
     }
 
     /**

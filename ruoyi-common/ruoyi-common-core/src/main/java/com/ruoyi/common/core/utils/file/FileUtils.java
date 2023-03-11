@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @author ruoyi
  */
 public class FileUtils {
+
     /**
      * 字符常量：斜杠 {@code '/'}
      */
@@ -25,14 +26,13 @@ public class FileUtils {
      */
     public static final char BACKSLASH = '\\';
 
-    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
+    public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-|.\\u4e00-\\u9fa5]+";
 
     /**
      * 输出指定文件的byte数组
      *
      * @param filePath 文件路径
      * @param os       输出流
-     * @return
      */
     public static void writeBytes(String filePath, OutputStream os) throws IOException {
         FileInputStream fis = null;
@@ -47,8 +47,6 @@ public class FileUtils {
             while ((length = fis.read(b)) > 0) {
                 os.write(b, 0, length);
             }
-        } catch (IOException e) {
-            throw e;
         } finally {
             if (os != null) {
                 try {
@@ -187,9 +185,8 @@ public class FileUtils {
      *
      * @param response     响应对象
      * @param realFileName 真实文件名
-     * @return
      */
-    public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws UnsupportedEncodingException {
+    public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) {
         String percentEncodedFileName = percentEncode(realFileName);
 
         String contentDispositionValue = "attachment; filename=" +
@@ -209,7 +206,7 @@ public class FileUtils {
      * @param s 需要百分号编码的字符串
      * @return 百分号编码后的字符串
      */
-    public static String percentEncode(String s) throws UnsupportedEncodingException {
+    public static String percentEncode(String s) {
         String encode = URLEncoder.encode(s, StandardCharsets.UTF_8);
         return encode.replaceAll("\\+", "%20");
     }

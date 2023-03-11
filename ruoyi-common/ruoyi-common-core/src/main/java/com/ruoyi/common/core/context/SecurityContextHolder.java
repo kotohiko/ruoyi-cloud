@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author ruoyi
  */
 public class SecurityContextHolder {
+
     private static final TransmittableThreadLocal<Map<String, Object>> THREAD_LOCAL = new TransmittableThreadLocal<>();
 
     public static void set(String key, Object value) {
@@ -35,7 +36,7 @@ public class SecurityContextHolder {
     public static Map<String, Object> getLocalMap() {
         Map<String, Object> map = THREAD_LOCAL.get();
         if (map == null) {
-            map = new ConcurrentHashMap<String, Object>();
+            map = new ConcurrentHashMap<>();
             THREAD_LOCAL.set(map);
         }
         return map;
