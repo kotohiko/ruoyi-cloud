@@ -5,7 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.core.constant.SecurityConstants;
+import com.ruoyi.common.core.constants.SecurityConstants;
 import com.ruoyi.common.core.exception.InnerAuthException;
 import com.ruoyi.common.core.utils.ServletUtils;
 import com.ruoyi.common.core.utils.StringUtils;

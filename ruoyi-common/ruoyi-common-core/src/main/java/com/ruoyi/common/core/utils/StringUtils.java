@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.springframework.util.AntPathMatcher;
-import com.ruoyi.common.core.constant.Constants;
+import com.ruoyi.common.core.constants.Constants;
 import com.ruoyi.common.core.text.StrFormatter;
 
 /**

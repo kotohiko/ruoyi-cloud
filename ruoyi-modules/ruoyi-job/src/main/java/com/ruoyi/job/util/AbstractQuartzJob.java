@@ -6,7 +6,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ruoyi.common.core.constant.ScheduleConstants;
+import com.ruoyi.common.core.constants.ScheduleConstants;
 import com.ruoyi.common.core.utils.ExceptionUtil;
 import com.ruoyi.common.core.utils.SpringUtils;
 import com.ruoyi.common.core.utils.StringUtils;

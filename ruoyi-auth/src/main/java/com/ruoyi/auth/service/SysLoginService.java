@@ -2,10 +2,10 @@ package com.ruoyi.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.ruoyi.common.core.constant.CacheConstants;
-import com.ruoyi.common.core.constant.Constants;
-import com.ruoyi.common.core.constant.SecurityConstants;
-import com.ruoyi.common.core.constant.UserConstants;
+import com.ruoyi.common.core.constants.CacheConstants;
+import com.ruoyi.common.core.constants.Constants;
+import com.ruoyi.common.core.constants.SecurityConstants;
+import com.ruoyi.common.core.constants.UserConstants;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.enums.UserStatus;
 import com.ruoyi.common.core.exception.ServiceException;

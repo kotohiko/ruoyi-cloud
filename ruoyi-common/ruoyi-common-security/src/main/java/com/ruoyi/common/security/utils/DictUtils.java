@@ -3,7 +3,7 @@ package com.ruoyi.common.security.utils;
 import java.util.Collection;
 import java.util.List;
 import com.alibaba.fastjson2.JSONArray;
-import com.ruoyi.common.core.constant.CacheConstants;
+import com.ruoyi.common.core.constants.CacheConstants;
 import com.ruoyi.common.core.utils.SpringUtils;
 import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.redis.service.RedisService;

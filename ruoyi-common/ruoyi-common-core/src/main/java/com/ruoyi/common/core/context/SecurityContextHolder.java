@@ -3,7 +3,7 @@ package com.ruoyi.common.core.context;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.ruoyi.common.core.constant.SecurityConstants;
+import com.ruoyi.common.core.constants.SecurityConstants;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.core.utils.StringUtils;
 
